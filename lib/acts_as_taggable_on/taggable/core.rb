@@ -225,7 +225,7 @@ module ActsAsTaggableOn::Taggable
         query = self
         query = self.select(select_clause.join(',')) unless select_clause.empty?
         query.joins(joins.join(' '))
-          .where(conditions.join(' AND '))
+          .where("#{ conditions.join(' AND ')} AND tags.organisation_id IS NULL")
           .group(group)
           .having(having)
           .order(order_by.join(', '))
