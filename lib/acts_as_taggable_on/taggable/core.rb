@@ -178,8 +178,7 @@ module ActsAsTaggableOn::Taggable
             tagging_join = "JOIN #{ActsAsTaggableOn::Tagging.table_name} #{taggings_alias}" \
                 "  ON #{taggings_alias}.taggable_id = #{quote}#{table_name}#{quote}.#{primary_key}" +
                 " AND #{taggings_alias}.taggable_type = #{quote_value(base_class.name, nil)}" +
-                " AND #{taggings_alias}.tag_id = #{quote_value(tag.id, nil)}" +
-                " AND tags.organisation_id IS NULL"
+                " AND #{taggings_alias}.tag_id = #{quote_value(tag.id, nil)}"
 
             tagging_join << " AND " + sanitize_sql(["#{taggings_alias}.created_at >= ?", options.delete(:start_at)]) if options[:start_at]
             tagging_join << " AND " + sanitize_sql(["#{taggings_alias}.created_at <= ?", options.delete(:end_at)])   if options[:end_at]

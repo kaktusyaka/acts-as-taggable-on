@@ -35,7 +35,7 @@ module ActsAsTaggableOn
       clause = list.map { |tag|
         sanitize_sql_for_named_any(tag).force_encoding('BINARY')
       }.join(' OR ')
-      where(clause)
+      where(clause).where(organisation_id: nil)
     end
 
     def self.named_like(name)
